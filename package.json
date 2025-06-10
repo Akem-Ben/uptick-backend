@@ -1,0 +1,58 @@
+{
+  "name": "uptick-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile:watch": "tsc -w",
+    "compile": "tsc",
+    "start": "cross-env NODE_ENV=production node build/app.js",
+    "predev": "cross-env NODE_ENV=development",
+    "dev": "nodemon --exec",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akem-Ben/uptick-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Akem-Ben/uptick-backend/issues"
+  },
+  "homepage": "https://github.com/Akem-Ben/uptick-backend#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "compression": "^1.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash.merge": "^4.6.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.0",
+    "sequelize": "^6.37.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.6",
+    "@types/compression": "^1.8.1",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/dotenv": "^6.1.1",
+    "@types/http-errors": "^2.0.5",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/lodash.merge": "^4.6.9",
+    "@types/morgan": "^1.9.10"
+  }
+}
