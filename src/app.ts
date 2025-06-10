@@ -11,6 +11,7 @@ import http from 'http';
 import { errorUtilities } from "./utilities";
 import database from "./configurations/database";
 import config from "./configurations/config";
+import apiRouter from './routes';
 import './models/associations';
 
 errorUtilities.processErrorHandler()
@@ -46,7 +47,7 @@ database
 
 
 // Routes
-// app.use("/api/v1", apiRouter);
+app.use("/api/v1", apiRouter);
 
 
 // Health Check Endpoint

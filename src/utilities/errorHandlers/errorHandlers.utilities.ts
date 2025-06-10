@@ -24,7 +24,8 @@ const withControllerErrorHandling = (fn: (...args: any[]) => Promise<any>) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await fn(req, res, next);
-    } catch (error) {
+    } catch (error:any) {
+      console.error('Service error:', error.message);
       next(error);
     }
   };

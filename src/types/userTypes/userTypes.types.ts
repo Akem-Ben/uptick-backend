@@ -13,4 +13,6 @@ export interface UserAttributes {
   isVerified: boolean;
   isFirstTimeLogin: boolean;
   role: string;
+  isActive: boolean;
+  isBlocked: boolean;
 }

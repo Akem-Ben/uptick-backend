@@ -11,6 +11,8 @@ class Users extends Model<UserAttributes> implements UserAttributes {
     public isVerified!: boolean;
     public isFirstTimeLogin!: boolean;
     public role!: string;
+    public isActive!: boolean;
+    public isBlocked!: boolean;
 }
 
 Users.init(
@@ -44,10 +46,20 @@ Users.init(
             allowNull: false,
             defaultValue: false,
         },
-        isFirstTimeLogin: {
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true,
+        },
+        isBlocked: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
+        },
+        isFirstTimeLogin: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true,
         },
         role: {
             allowNull: false,
