@@ -1,3 +1,9 @@
+export enum UserRoles {
+  ADMIN = 'admin',
+  USER = 'user',
+  MODERATOR = 'moderator'
+}
+
 export interface UserAttributes {
   id: string;
   firstName: string;
@@ -7,10 +13,4 @@ export interface UserAttributes {
   isVerified: boolean;
   isFirstTimeLogin: boolean;
   role: string;
-}
-
-
-export enum UserRoles {
-    User = "User",
-    Admin = "Admin"
 }
