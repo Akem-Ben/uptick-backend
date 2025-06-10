@@ -1,7 +1,6 @@
 export enum UserRoles {
   ADMIN = 'admin',
-  USER = 'user',
-  MODERATOR = 'moderator'
+  USER = 'user'
 }
 
 export interface UserAttributes {
@@ -15,4 +14,5 @@ export interface UserAttributes {
   role: string;
   isActive: boolean;
   isBlocked: boolean;
+  verifiedAt: Date;
 }

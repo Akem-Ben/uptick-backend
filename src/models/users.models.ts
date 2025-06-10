@@ -13,6 +13,7 @@ class Users extends Model<UserAttributes> implements UserAttributes {
     public role!: string;
     public isActive!: boolean;
     public isBlocked!: boolean;
+    public verifiedAt!: Date
 }
 
 Users.init(
@@ -45,6 +46,10 @@ Users.init(
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
+        },
+        verifiedAt:{
+             type: DataTypes.DATE,
+            allowNull: true,
         },
         isActive: {
             type: DataTypes.BOOLEAN,

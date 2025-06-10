@@ -14,13 +14,23 @@ const userRepositories = {
     }
   },
 
+  getByPK: async (id:string) => {
+     try {
+      const user = await Users.findByPk(id);
+      return user;
+    } catch (error: any) {
+        console.log(`Fetch User by Error: ${error.message}`)
+      throw errorHandlersUtilities.createError(`Error Fetching user, please try again`, 500);
+    }
+  },
+
   updateOne: async (filter: any, update: any, transaction?: Transaction) => {
     try {
       const user:any = await Users.findOne({ where: filter });
       await user.update(update, { transaction });
       return user;
     } catch (error: any) {
-      throw new Error(`Error updating User: ${error.message}`);
+      throw errorHandlersUtilities.createError(`Error updating User: ${error.message}`, 400);
     }
   },
   
@@ -58,11 +68,13 @@ const userRepositories = {
     try {
       const user = await Users.findOne({
         where: filter,
-        attributes: projection
+        attributes: projection,
+        raw: true
       });
       return user;
     } catch (error: any) {
-      throw new Error(`Error fetching User: ${error.message}`);
+        console.log(`Fetch User Error: ${error.message}`)
+      throw errorHandlersUtilities.createError(`Error fetching user, please try again`, 500);
     }
   },
   
@@ -88,8 +100,6 @@ const userRepositories = {
         firstName: userData.firstName,
         lastName: userData.lastName,
         role: userData.role,
-        phone: userData.phone,
-        refreshToken: userData.refreshToken,
         id:userData.id
       };
     } catch (error: any) {

@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from "bcryptjs";
+import { errorUtilities } from '../index';
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ const hashPassword = async (password: string) => {
 };
 
 const generateToken = (data: any) => {
-  return jwt.sign(data.data, `${process.env.APP_SECRET}`, { expiresIn: `${data.expires}` });
+  return jwt.sign(data.data, `${process.env.APP_JWT_SECRET}`, { expiresIn: `${data.expires}` });
 };
 
 const convertToDDMMYY = (isoDateString: any) => {
@@ -42,15 +43,33 @@ const convertToISODateString = (regularDateString: any): string | null => {
 };
 
 const validateToken = (token: string) => {
+  if (!token) {
+    throw errorUtilities.createError('Token is required', 400);
+  }
+
+  if (!process.env.APP_JWT_SECRET) {
+    throw errorUtilities.createError('JWT secret is not configured', 400);
+  }
+
   try {
-    const decoded = jwt.verify(token, process.env.APP_JWT_SECRET!);
+    const decoded = jwt.verify(token, process.env.APP_JWT_SECRET);
     return decoded;
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      throw errorUtilities.createError('Token has expired, please request for another verification link', 400);
+    }
+    
+    if (error instanceof jwt.JsonWebTokenError) {
+            console.error(`Invalid token: ${error.message}`)
+      throw errorUtilities.createError(`Invalid token, Please request another verification link`, 400);
+    }
+    
+    if (error instanceof jwt.NotBeforeError) {
+      throw errorUtilities.createError('Token is not active yet. Please request for another verification link', 400);
+    }
+    throw errorUtilities.createError(`Token validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`, 400);
   }
-  catch (error) {
-    console.error('Token validation error:', error);
-    return null;
-  }
-}
+};
 
 export default {
   generateToken,

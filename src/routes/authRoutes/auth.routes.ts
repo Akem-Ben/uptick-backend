@@ -6,7 +6,7 @@ const router = express.Router()
 
 
 router.post('/signup', joiValidations.inputValidator(joiValidations.userRegisterSchemaViaEmail), authControllers.userRestrationController)
-// router.post('/login')
+router.get('/verify-user/:token', authControllers.veryUserAccountController)
 // router.post('/verify-user')
 // router.post('/reset-password-request')
 // router.patch('/change-password')
