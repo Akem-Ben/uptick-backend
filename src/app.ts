@@ -11,7 +11,7 @@ import http from 'http';
 import { errorUtilities } from "./utilities";
 import database from "./configurations/database";
 import config from "./configurations/config";
-// import './models/associations';
+import './models/associations';
 
 errorUtilities.processErrorHandler()
 
